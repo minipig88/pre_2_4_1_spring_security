@@ -13,6 +13,9 @@
     <title>Log in with your account</title>
 </head>
 <body>
+<div style="right: auto">
+<jsp:include page="logout.jsp" />
+</div>
 <sec:authorize access="isAuthenticated()">
     <% response.sendRedirect("/"); %>
 </sec:authorize>
