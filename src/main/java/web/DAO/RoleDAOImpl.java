@@ -12,11 +12,11 @@ public class RoleDAOImpl implements RoleDAO{
 
     @Override
     public Role getUserRole() {
-      return sessionFactory.getCurrentSession().get(Role.class, 2);
+      return sessionFactory.getCurrentSession().get(Role.class, 2L);
     }
 
     @Override
     public Role getAdminRole() {
-        return sessionFactory.getCurrentSession().get(Role.class, 1);
+        return sessionFactory.getCurrentSession().get(Role.class, 1L);
     }
 }

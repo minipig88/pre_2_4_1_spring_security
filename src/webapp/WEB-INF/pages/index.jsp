@@ -17,14 +17,12 @@
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/style.css">
 </head>
 <body>
+<jsp:include page="logout.jsp" />
 <div>
     <h3>${pageContext.request.userPrincipal.name}</h3>
     <sec:authorize access="!isAuthenticated()">
         <h4><a href="/login">Login</a></h4>
         <h4><a href="/registration">Registration</a></h4>
-    </sec:authorize>
-    <sec:authorize access="isAuthenticated()">
-        <h4><a href="/logout">Logout</a></h4>
     </sec:authorize>
     <h4><a href="/news">News (For only users)</a></h4>
     <h4><a href="/admin/userList">User List (For only admins)</a></h4>

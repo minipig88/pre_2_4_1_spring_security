@@ -13,6 +13,7 @@
     <title>Log in with your account</title>
 </head>
 <body>
+<jsp:include page="logout.jsp" />
 <sec:authorize access="isAuthenticated()">
     <% response.sendRedirect("/"); %>
 </sec:authorize>

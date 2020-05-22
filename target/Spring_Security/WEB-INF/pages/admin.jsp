@@ -13,16 +13,19 @@
 <head>
     <meta charset="utf-8">
     <title>Admin page</title>
-    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/style.css">
 </head>
 <body>
+<jsp:include page="logout.jsp" />
 <div>
-    <table>
+    <table border="1" cellpadding="5">
         <thead>
-        <th>ID</th>
-        <th>UserName</th>
-        <th>Password</th>
-        <th>Roles</th>
+        <tr>
+            <th>ID</th>
+            <th>UserName</th>
+            <th>Password</th>
+            <th>Roles</th>
+            <th>Action</th>
+        </tr>
         </thead>
         <c:forEach items="${allUsers}" var="user">
             <tr>

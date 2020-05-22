@@ -1,6 +1,7 @@
 package web.DAO;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import web.models.User;
@@ -15,9 +16,10 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public User findByUsername(String username) {
-        TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery("FROM User WHERE username=:paramName");
+        Query<User> query = sessionFactory.getCurrentSession().createQuery("FROM User WHERE username=:paramName");
         query.setParameter("paramName", username);
-        return query.getSingleResult();
+        User user = query.uniqueResult();
+        return user;
     }
 
     @Override

@@ -15,6 +15,7 @@
     <title>News</title>
 </head>
 <body>
+<jsp:include page="logout.jsp" />
 <div>
     <h2>Some news <br> Only for authentication users</h2>
     <a href="/">Home page</a>

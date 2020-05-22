@@ -27,6 +27,6 @@ public class AdminController {
             if (action.equals("delete")){
                 userService.deleteUser(userId);
             }
-            return "redirect:/admin";
+            return "redirect:/admin/userList";
         }
 }

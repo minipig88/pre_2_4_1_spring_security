@@ -40,6 +40,11 @@ public class User implements UserDetails {
     public User() {
     }
 
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     public User(String username, String password, Set<Role> roles) {
         this.username = username;
         this.password = password;
@@ -69,7 +74,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return getName();
+        return username;
     }
 
     @Override
@@ -100,12 +105,8 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    public String getName() {
-        return username;
-    }
-
-    public void setName(String name) {
-        this.username = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
