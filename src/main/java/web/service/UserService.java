@@ -1,10 +1,13 @@
 package web.service;
 
-import org.springframework.stereotype.Service;
 import web.models.User;
 
-@Service
+import java.util.List;
+
 public interface UserService {
-    void save (User user);
+    boolean save (User user);
     User findByUsername(String username);
+    User getUserById(long id);
+    List<User> getAllUser();
+    void deleteUser(long id);
 }

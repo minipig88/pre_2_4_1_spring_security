@@ -1,12 +1,13 @@
 package web.models;
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -16,33 +17,38 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "name", unique = true)
+    //@NotNull
+    @Size(min=5, message = "5 characters minimum")
+    private String username;
 
     @Column(name = "password")
+    @NotNull
+    @Size(min=5, message = "5 characters minimum")
     private String password;
 
     @Transient
-    private String confirmPassword;
+    @NotNull
+    @Size(min=5, message = "5 characters minimum")
+    private String passwordConfirm;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-
     private Set<Role> roles;
 
     public User() {
     }
 
-    public User(String name, String password, Set<Role> roles) {
-        this.name = name;
+    public User(String username, String password, Set<Role> roles) {
+        this.username = username;
         this.password = password;
         this.roles = roles;
     }
 
-    public User(long id, String name, String password, Set<Role> roles) {
+    public User(long id, String username, String password, Set<Role> roles) {
         this.id = id;
-        this.name = name;
+        this.username = username;
         this.password = password;
         this.roles = roles;
     }
@@ -54,11 +60,11 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
+        /*Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         for (Role r : getRoles()) {
             grantedAuthorities.add(new SimpleGrantedAuthority(r.getAuthority()));
-        }
-        return grantedAuthorities;
+        }*/
+        return getRoles();
     }
 
     @Override
@@ -68,22 +74,22 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 
     public long getId() {
@@ -95,11 +101,11 @@ public class User implements UserDetails {
     }
 
     public String getName() {
-        return name;
+        return username;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.username = name;
     }
 
     public String getPassword() {
@@ -110,12 +116,12 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public String getConfirmPassword() {
-        return confirmPassword;
+    public String getPasswordConfirm() {
+        return passwordConfirm;
     }
 
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
+    public void setPasswordConfirm(String passwordConfirm) {
+        this.passwordConfirm = passwordConfirm;
     }
 
     public Set<Role> getRoles() {
