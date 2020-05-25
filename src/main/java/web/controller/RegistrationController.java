@@ -49,12 +49,12 @@ public class RegistrationController {
             model.addAttribute("usernameError", "A user with the same name already exists.");
             return "registration";
         }
-        authenticateUserAndSetSession(userForm, request);
+        //authenticateUserAndSetSession(userForm, request);
 
         return "redirect:/";
     }
 
-    private void authenticateUserAndSetSession(User user, HttpServletRequest request) {
+    /*private void authenticateUserAndSetSession(User user, HttpServletRequest request) {
         String username = user.getUsername();
         String password = user.getPassword();
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
@@ -65,6 +65,6 @@ public class RegistrationController {
         Authentication authenticatedUser = authenticationManager.authenticate(token);
 
         SecurityContextHolder.getContext().setAuthentication(authenticatedUser);
-    }
+    }*/
 
 }
